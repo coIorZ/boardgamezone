@@ -58,7 +58,7 @@
             120,
             2
         ],
-        "no-console": 1,
+        "no-console": 0,
         "no-multiple-empty-lines": 2,
         "object-curly-spacing": [
             2,
