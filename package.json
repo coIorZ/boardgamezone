@@ -1,0 +1,51 @@
+{
+  "name": "boardgamezone",
+  "version": "0.0.1",
+  "description": "board game online play ground",
+  "main": "index.js",
+  "scripts": {
+    "build": "node_modules/.bin/webpack --watch",
+    "start": "node_modules/.bin/nodemon server.js --exec babel-node"
+  },
+  "keywords": [
+    "board",
+    "game"
+  ],
+  "author": "coiorz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-useragent": "^1.0.7",
+    "lodash": "^4.17.4",
+    "pug": "^2.0.0-beta.12",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router-dom": "^4.1.1",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.2",
+    "redux-saga": "^0.14.8",
+    "reselect": "^3.0.0",
+    "uuid": "^3.0.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "bundle-loader": "^0.5.5",
+    "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.11.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1"
+  }
+}
