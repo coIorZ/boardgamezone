@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -6,14 +7,15 @@ module.exports = {
   },
   output: {
     path          : path.resolve(__dirname, 'dist'),
-    filename      : '[name].js',
-    publicPath    : '/dist/',
-    chunkFilename : '[id].[name].js'
+    filename      : 'js/[name].js',
+    publicPath    : '/',
+    chunkFilename : 'js/[id].[name].js'
   },
   resolve: {
     alias: {
       components : path.resolve(__dirname, 'src', 'components'),
-      common     : path.resolve(__dirname, 'src', 'common')
+      common     : path.resolve(__dirname, 'common'),
+      utils      : path.resolve(__dirname, 'src', 'utils')
     }
   },
   externals: {
@@ -33,5 +35,11 @@ module.exports = {
         test : /\.s?css$/
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template : './src/views/index.html',
+      inject   : true
+    })
+  ]
 };
