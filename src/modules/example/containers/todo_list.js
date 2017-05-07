@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Todo from '../components/todo';
 import { 
   getFilteredTodos, getFilter,
-  addTodo, setFilter
+  addTodo, setFilter, toggleTodo
 } from '../ducks';
 
 class TodoList extends Component {
@@ -18,6 +18,7 @@ class TodoList extends Component {
     const {
       term = ''
     } = this.state;
+
     const {
       todos = {}
     } = this.props;
@@ -31,11 +32,12 @@ class TodoList extends Component {
           />
         </form>
         <ul>
-          {map(todos, todo => <Todo key={todo.id} {...todo}/>)}
+          {map(todos, todo => <Todo key={todo.id} {...todo} onToggle={this.toggleTodo}/>)}
         </ul>
         <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
         <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
         <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
+        <div onClick={() => window.history.back()}>Back</div>
       </div>
     );
   }
@@ -52,6 +54,10 @@ class TodoList extends Component {
     this.setState({ term: '' });
   }
 
+  toggleTodo = (id) => {
+    this.props.toggleTodo(id);
+  }
+
   changeFilter = (filterStr) => {
     this.props.setFilter(filterStr);
   }
@@ -64,4 +70,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { addTodo, setFilter })(TodoList));
+export default withRouter(connect(mapStateToProps, { addTodo, setFilter, toggleTodo })(TodoList));

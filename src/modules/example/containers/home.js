@@ -6,10 +6,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1> Welcome to Example Home Page</h1>
+        <h1> Example Home Page</h1>
         <ul>
-          <li><Link to='/example/todo-list'>todolist</Link></li>
-          <li><Link to='/example/user'>user</Link></li>
+          <li><Link to='/example/todo-list'>todo list</Link></li>
+          <li><Link to='/example/post-list'>post list</Link></li>
         </ul>
       </div>
     );

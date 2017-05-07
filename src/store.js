@@ -1,7 +1,7 @@
 import { applyMiddleware } from 'redux';
 
-import { createStore } from 'common/redux_async';
-import logger from 'common/middleware/logger';
+import { createStore } from 'utils/redux/redux_async';
+import logger from 'utils/redux/logger';
 
 const store = createStore(
   () => {return {};},

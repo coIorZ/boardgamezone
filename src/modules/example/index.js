@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { createBundle } from 'common/redux_async';
+import { createBundle } from 'utils/redux/redux_async';
 
 import reducer from 'bundle-loader?lazy!./ducks';
 import home from 'bundle-loader?lazy!./containers/home';

@@ -1,5 +1,11 @@
 import React from 'react';
 
-export default ({ title }) => (
-  <li>{title}</li>
+const noop = function() {};
+
+export default ({ title, id, onToggle = noop }) => (
+  <li>
+    <span onClick={onToggle.bind(null, id)}>
+      {title}
+    </span>
+  </li>
 );

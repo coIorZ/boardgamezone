@@ -1,36 +1,62 @@
 import React, { Component } from 'react';
 
 export default class Bundle extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mod: null
-    };
+  state = {
+    isLoaded : false,
+    mods     : null
   }
 
-  componentWillMount() {
-    this.load(this.props);
+  componentDidMount() {
+    this._isMounted = true;
+    this.load();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.load !== this.props.load) {
-      this.load(nextProps);
+  componentDidUpdate(prevProps) {
+    const shouldLoad = !!Object.keys(this.props.load).filter((key) => {
+      return this.props.load[key] !== prevProps.load[key];
+    }).length;
+    if(shouldLoad) {
+      this.load();
     }
   }
 
-  load(props) {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  load() {
     this.setState({
-      mod: null
+      isLoaded: false
     });
-    props.load((mod) => {
-      this.setState({
-        // handle both es imports and cjs
-        mod: mod.default ? mod.default : mod
+
+    const { load } = this.props;
+    const keys = Object.keys(load);
+
+    Promise.all(keys.map(key => promisify(load[key])()))
+      .then((values) => keys.reduce((memo, key, index) => {
+        memo[key] = values[index].default ? values[index].default : values[index];
+        return memo;
+      }, {}))
+      .then((result) => {
+        if(!this._isMounted) return null;
+        this.setState({
+          isLoaded : true,
+          mods     : result
+        });
       });
-    });
   }
 
   render() {
-    return this.props.children(this.state.mod);
+    const { isLoaded, mods } = this.state;
+    return isLoaded ? React.Children.only(this.props.children(mods)) : null;
   }
+}
+
+function promisify(loader) {
+  return () => new Promise((resolve, reject) => {
+    loader((result) => {
+      if(result) return resolve(result);
+      reject();
+    });
+  });
 }

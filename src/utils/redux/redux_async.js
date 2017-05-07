@@ -2,7 +2,6 @@ import React from 'react';
 import { combineReducers, createStore } from 'redux';
 
 import Bundle from 'components/bundle';
-import Loading from 'components/loading';
 
 let store;
 
@@ -21,17 +20,12 @@ function _createStore(...args) {
 }
 export { _createStore as createStore };
 
-export function createBundle(loadReducer) {
-  return (loader) => () => (
-    <Bundle load={loadReducer}>
-      {(reducer) => {
-        if(!reducer) return <Loading/>;
+export function createBundle(reducer) {
+  return (Loader) => () => (
+    <Bundle load={{ reducer, Loader }}>
+      {({ reducer, Loader }) => {
         injectReducer(reducer);
-        return (
-          <Bundle load={loader}>
-            {(Page) => Page ? <Page/> : null}
-          </Bundle>
-        );
+        return <Loader/>;
       }}
     </Bundle>
   );
