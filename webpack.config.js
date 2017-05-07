@@ -13,9 +13,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      components : path.resolve(__dirname, 'src', 'components'),
       common     : path.resolve(__dirname, 'common'),
-      utils      : path.resolve(__dirname, 'src', 'utils')
+      components : path.resolve(__dirname, 'src', 'components'),
+      utils      : path.resolve(__dirname, 'src', 'utils'),
+      shared     : path.resolve(__dirname, 'src', 'shared')
     }
   },
   externals: {
