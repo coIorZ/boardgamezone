@@ -1,4 +1,6 @@
+/*eslint-disable no-unused-vars*/
 import React, { Component } from 'react';
+/*eslint-enable no-unused-vars*/
 import { withRouter } from 'react-router-dom';
 
 class ScrollToTop extends Component {

@@ -16,13 +16,8 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-function mapDispatchToProps(dispath) {
-
+function mapStateToProps() {
+  return {};
 }
 
 export default withRouter(connect(mapStateToProps)(Home));
