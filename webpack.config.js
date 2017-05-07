@@ -33,6 +33,10 @@ module.exports = {
       {
         use  : ['style-loader', 'css-loader', 'sass-loader'],
         test : /\.s?css$/
+      },
+      {
+        use  : ['url-loader?limit=40000'],
+        test : /\.(jpe?g|png|gif|svg)$/
       }
     ]
   },
