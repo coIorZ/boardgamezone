@@ -7,7 +7,9 @@ import example from './modules/example';
 export default (
   <Router>
     <ScrollToTop>
-      {example}
+      <div>
+        {example}
+      </div>
     </ScrollToTop>
   </Router>
 );

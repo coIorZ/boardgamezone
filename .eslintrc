@@ -66,6 +66,7 @@
         ],
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
+        "react/jsx-indent-props": 1,
         "semi": 2,
         "space-infix-ops": [
             2,

@@ -1,4 +1,4 @@
-import { filter } from 'lodash';
+import filter from 'lodash/filter';
 import { combineReducers } from 'redux';
 import { createAction, handleActions, handleAction } from 'redux-actions';
 import { createSelector } from 'reselect';
@@ -53,3 +53,4 @@ const _getFilteredTodos = (todos, filterStr) => {
   }
 };
 export const getFilteredTodos = createSelector(getTodos, getFilter, _getFilteredTodos);
+export const getActiveTodos = createSelector(getTodos, todos => (filter(todos, todo => (!todo.done))));

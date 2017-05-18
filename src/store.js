@@ -1,6 +1,6 @@
 import { applyMiddleware } from 'redux';
 
-import { createStore } from 'utils/redux/redux_async';
+import { createStore } from 'utils/redux/redux_bundle';
 import logger from 'utils/redux/logger';
 
 const store = createStore(

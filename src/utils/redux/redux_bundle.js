@@ -22,7 +22,8 @@ export function createBundle(reducer) {
   return (Loader) => () => (
     <Bundle load={{ reducer: promisify(reducer), Loader: promisify(Loader) }}>
       {({ reducer, Loader }) => {
-        injectReducer(reducer);
+        injectReducer(reducer.default);
+        Loader = Loader.default(reducer);
         return <Loader/>;
       }}
     </Bundle>
@@ -63,7 +64,8 @@ export class Bundle extends Component {
 
     Promise.all(keys.map(key => load[key]()))
       .then((values) => keys.reduce((memo, key, index) => {
-        memo[key] = values[index].default ? values[index].default : values[index];
+        //memo[key] = values[index].default ? values[index].default : values[index];
+        memo[key] = values[index];
         return memo;
       }, {}))
       .then((result) => {

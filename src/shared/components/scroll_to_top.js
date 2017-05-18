@@ -1,9 +1,8 @@
 /*eslint-disable no-unused-vars*/
 import React, { Component } from 'react';
 /*eslint-enable no-unused-vars*/
-import { withRouter } from 'react-router-dom';
 
-class ScrollToTop extends Component {
+export default class ScrollToTop extends Component {
   componentDidUpdate(prevProps) {
     if (
       this.props.location !== prevProps.location &&
@@ -17,5 +16,3 @@ class ScrollToTop extends Component {
     return this.props.children;
   }
 }
-
-export default withRouter(ScrollToTop);

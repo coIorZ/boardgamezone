@@ -1,13 +1,10 @@
-import { map } from 'lodash';
+import map from 'lodash/map';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { withToolbar } from 'shared/components/toolbar';
 import Todo from '../components/todo';
-import { 
-  getFilteredTodos, getFilter,
-  addTodo, setFilter, toggleTodo
-} from '../ducks';
 
 class TodoList extends Component {
   state = {
@@ -20,29 +17,37 @@ class TodoList extends Component {
     } = this.state;
 
     const {
-      todos = {}
+      todos = {},
+      history
     } = this.props;
 
     return (
       <div>
-        <form onSubmit={this.addTodo}>
-          <input 
-            value={term}
-            onChange={this.onChangeTerm}
-          />
+        <form className='mdc-textfield mdc-textfield--fullwidth' 
+            onSubmit={this.addTodo}>
+          <input className='mdc-textfield__input'
+              value={term}
+              onChange={this.changeTerm}/>
         </form>
-        <ul>
-          {map(todos, todo => <Todo key={todo.id} {...todo} onToggle={this.toggleTodo}/>)}
+        <ul className='mdc-list'>
+          {map(todos, todo => (
+            <Todo {...todo}
+                key={todo.id}  
+                onToggle={this.toggleTodo.bind(null, todo.id)}/>
+          ))}
         </ul>
-        <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
-        <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
-        <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
-        <div onClick={() => window.history.back()}>Back</div>
+        <button className='mdc-button' 
+            onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
+        <button className='mdc-button' 
+            onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
+        <button className='mdc-button' 
+            onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
+        <div onClick={history.goBack}>Back</div>
       </div>
     );
   }
 
-  onChangeTerm = (e) => {
+  changeTerm = (e) => {
     this.setState({ term: e.target.value });
   }
 
@@ -63,11 +68,20 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
+export default (ducks) => {
+  const { 
+    getFilteredTodos, getFilter,
+    addTodo, setFilter, toggleTodo
+  } = ducks;
+
+  const mapStateToProps = (state) => ({
     todos  : getFilteredTodos(state),
     filter : getFilter(state)
-  };
-}
+  });
 
-export default withRouter(connect(mapStateToProps, { addTodo, setFilter, toggleTodo })(TodoList));
+  return withRouter(withToolbar(connect(mapStateToProps, { 
+    addTodo, setFilter, toggleTodo 
+  })(TodoList), { 
+    title: 'Example Module: todolist' 
+  }));
+};

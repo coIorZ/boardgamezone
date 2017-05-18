@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { withToolbar } from 'shared/components/toolbar';
+
 class PostList extends Component {
   render() {
     return (
       <div>
-        <h1>Post List Page</h1>
+        <h3>{this.props.todos.length} active todos</h3>
       </div>
     );
   }
 }
 
-function mapStateToProps() {
-  return {};
-}
+export default (ducks) => {
+  const { 
+    getActiveTodos
+  } = ducks;
 
-export default withRouter(connect(mapStateToProps)(PostList));
+  const mapStateToProps = (state) => ({
+    todos: getActiveTodos(state)
+  });
+
+  return withRouter(withToolbar(connect(mapStateToProps, {
+  })(PostList), { 
+    title: 'Example Module: postlist' 
+  }));
+};
