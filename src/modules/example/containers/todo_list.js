@@ -17,8 +17,7 @@ class TodoList extends Component {
     } = this.state;
 
     const {
-      todos = {},
-      history
+      todos = {}
     } = this.props;
 
     return (
@@ -36,13 +35,12 @@ class TodoList extends Component {
                 onToggle={this.toggleTodo.bind(null, todo.id)}/>
           ))}
         </ul>
-        <button className='mdc-button' 
+        <button className='mdc-button mdc-button--raised' 
             onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
-        <button className='mdc-button' 
+        <button className='mdc-button mdc-button--raised' 
             onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
-        <button className='mdc-button' 
+        <button className='mdc-button mdc-button--raised' 
             onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
-        <div onClick={history.goBack}>Back</div>
       </div>
     );
   }

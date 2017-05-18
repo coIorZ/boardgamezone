@@ -12,6 +12,7 @@ app.use(logger);
 app.engine('html', require('ejs').renderFile);
 app.set('views', path.resolve(__dirname, 'dist'));
 app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(express.static(path.resolve(__dirname, 'node_modules', 'material-design-icons', 'iconfont')));
 
 app.use('/api', routes);
 

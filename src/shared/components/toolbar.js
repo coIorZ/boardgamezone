@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 export default class Toolbar extends Component {
   render() {
     const {
-      height = 56,
+      height,
       title = ''
     } = this.props;
 
@@ -14,6 +14,9 @@ export default class Toolbar extends Component {
             style={{ height }}>
           <div className='mdc-toolbar__row'>
             <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
+              <span style={{ paddingRight: 24 }}>
+                <i className='material-icons'>menu</i>
+              </span>
               <span className='mdc-toolbar__title'>{title}</span>
             </section>
           </div>
@@ -26,7 +29,7 @@ export default class Toolbar extends Component {
   }
 }
 
-export function withToolbar(Comp, { height = 56, title = '' } = {}) {
+export function withToolbar(Comp, { height, title = '' } = {}) {
   return class extends Component {
     render() {
       return (
@@ -35,6 +38,9 @@ export function withToolbar(Comp, { height = 56, title = '' } = {}) {
               style={{ height }}>
             <div className='mdc-toolbar__row'>
               <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
+                <span style={{ paddingRight: 24 }}>
+                  <i className='material-icons'>menu</i>
+                </span>
                 <span className='mdc-toolbar__title'>{title}</span>
               </section>
             </div>
