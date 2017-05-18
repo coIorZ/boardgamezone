@@ -1,9 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const LodashWebpackPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: ['babel-polyfill', './src/index.js']
+    app    : ['./src/index.js'],
+    vendor : ['react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'lodash']
   },
   output: {
     path          : path.resolve(__dirname, 'dist'),
@@ -21,7 +24,10 @@ module.exports = {
   },
   externals: {
     'react'     : 'React',
-    'react-dom' : 'ReactDOM'
+    'react-dom' : 'ReactDOM',
+    'lodash'    : '_'
+    //'redux'       : 'Redux',
+    //'react-redux' : 'ReactRedux'
   },
   module: {
     rules: [
@@ -45,6 +51,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template : './src/views/index.html',
       inject   : true
+    }),
+    new LodashWebpackPlugin({
+      collections : true,
+      paths       : true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
     })
   ]
 };

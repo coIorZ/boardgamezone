@@ -1,4 +1,4 @@
-import filter from 'lodash/filter';
+import { filter } from 'lodash';
 import { combineReducers } from 'redux';
 import { createAction, handleActions, handleAction } from 'redux-actions';
 import { createSelector } from 'reselect';
