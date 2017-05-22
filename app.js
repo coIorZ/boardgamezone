@@ -1,11 +1,13 @@
 import express from 'express';
 import path from 'path';
 import useragent from 'express-useragent';
+import compression from 'compression';
 
 import logger from './middleware/logger.js';
 import routes from './routes';
 
 const app = express();
+app.use(compression());
 app.use(useragent.express());
 app.use(logger);
 

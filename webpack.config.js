@@ -2,11 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashWebpackPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
-    app    : ['./src/index.js'],
-    vendor : ['react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'lodash']
+    app: [
+      './src/index.js', 
+      './node_modules/material-components-web/dist/material-components-web.min.css'
+    ],
+    vendor: [
+      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'reselect', 
+      './node_modules/material-components-web/dist/material-components-web.min'
+    ]
   },
   output: {
     path          : path.resolve(__dirname, 'dist'),
@@ -18,16 +25,12 @@ module.exports = {
     alias: {
       common     : path.resolve(__dirname, 'common'),
       components : path.resolve(__dirname, 'src', 'components'),
-      utils      : path.resolve(__dirname, 'src', 'utils'),
-      shared     : path.resolve(__dirname, 'src', 'shared')
+      utils      : path.resolve(__dirname, 'src', 'utils')
     }
   },
   externals: {
-    'react'     : 'React',
-    'react-dom' : 'ReactDOM',
-    'lodash'    : '_'
-    //'redux'       : 'Redux',
-    //'react-redux' : 'ReactRedux'
+    'lodash': '_',
+    //'material-components-web' : 'mdc'
   },
   module: {
     rules: [
@@ -47,7 +50,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [
+  devtool : 'source-map',
+  plugins : [
     new HtmlWebpackPlugin({
       template : './src/views/index.html',
       inject   : true
@@ -58,6 +62,12 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new BundleAnalyzerPlugin()
   ]
 };
