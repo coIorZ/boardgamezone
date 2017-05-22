@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import Toolbar from 'components/mdc/toolbar';
+import { List, ListItem } from 'components/mdc/list';
 
 class Home extends Component {
   render() {
     return (
       <Toolbar title='Example Module'>
-        <ul>
-          <li><Link to='/example/todo-list'>todo list</Link></li>
-          <li><Link to='/example/post-list'>post list</Link></li>
-        </ul>
+        <List>
+          <Link to='/example/todo-list'><ListItem>todo list</ListItem></Link>
+          <Link to='/example/post-list'><ListItem>post list</ListItem></Link>
+        </List>
       </Toolbar>
     );
   }

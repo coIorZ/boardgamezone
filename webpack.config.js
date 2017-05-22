@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     app: [
       './src/index.js', 
+      'normalize.css',
       './node_modules/material-components-web/dist/material-components-web.min.css'
     ],
     vendor: [

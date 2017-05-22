@@ -2,12 +2,14 @@ import express from 'express';
 import path from 'path';
 import useragent from 'express-useragent';
 import compression from 'compression';
+import favicon from 'serve-favicon';
 
 import logger from './middleware/logger.js';
 import routes from './routes';
 
 const app = express();
 app.use(compression());
+app.use(favicon(path.resolve(__dirname, 'favicon.ico')));
 app.use(useragent.express());
 app.use(logger);
 
