@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { withToolbar } from 'shared/components/toolbar';
+import Toolbar from 'components/mdc/toolbar';
+import Button from 'components/mdc/button';
+import { List, ListItem } from 'components/mdc/list';
 import Todo from '../components/todo';
+import { 
+  getFilteredTodos, getFilter,
+  addTodo, setFilter, toggleTodo
+} from '../ducks';
 
 class TodoList extends Component {
   state = {
@@ -21,27 +27,27 @@ class TodoList extends Component {
     } = this.props;
 
     return (
-      <div>
+      <Toolbar title='Example Module: todolist'>
         <form className='mdc-textfield mdc-textfield--fullwidth' 
             onSubmit={this.addTodo}>
           <input className='mdc-textfield__input'
               value={term}
               onChange={this.changeTerm}/>
         </form>
-        <ul className='mdc-list'>
+        <List>
           {map(todos, todo => (
-            <Todo {...todo}
-                key={todo.id}  
-                onToggle={this.toggleTodo.bind(null, todo.id)}/>
+            <ListItem onClick={this.toggleTodo.bind(this, todo.id)}>
+              <Todo {...todo}/>
+            </ListItem>
           ))}
-        </ul>
-        <button className='mdc-button mdc-button--raised' 
-            onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
-        <button className='mdc-button mdc-button--raised' 
-            onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
-        <button className='mdc-button mdc-button--raised' 
-            onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
-      </div>
+        </List>
+        <Button label='all'
+            onClick={this.changeFilter.bind(this, 'ALL')}/>
+        <Button label='completed'
+            onClick={this.changeFilter.bind(this, 'COMPLETED')}/>
+        <Button label='active'
+            onClick={this.changeFilter.bind(this, 'ACTIVE')}/>
+      </Toolbar>
     );
   }
 
@@ -66,20 +72,13 @@ class TodoList extends Component {
   }
 }
 
-export default (ducks) => {
-  const { 
-    getFilteredTodos, getFilter,
-    addTodo, setFilter, toggleTodo
-  } = ducks;
-
-  const mapStateToProps = (state) => ({
+function mapStateToProps(state) {
+  return {
     todos  : getFilteredTodos(state),
     filter : getFilter(state)
-  });
+  };
+}
 
-  return withRouter(withToolbar(connect(mapStateToProps, { 
-    addTodo, setFilter, toggleTodo 
-  })(TodoList), { 
-    title: 'Example Module: todolist' 
-  }));
-};
+export default withRouter(connect(mapStateToProps, { 
+  addTodo, setFilter, toggleTodo 
+})(TodoList));

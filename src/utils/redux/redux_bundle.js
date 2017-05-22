@@ -18,13 +18,13 @@ function _createStore(...args) {
 }
 export { _createStore as createStore };
 
-export function createBundle(reducer) {
-  return (Loader) => () => (
-    <Bundle load={{ reducer: promisify(reducer), Loader: promisify(Loader) }}>
-      {({ reducer, Loader }) => {
-        injectReducer(reducer.default);
-        Loader = Loader.default(reducer);
-        return <Loader/>;
+export function bundle(module, name) {
+  return (
+    <Bundle load={{ module }}>
+      {({ module }) => {
+        injectReducer(module.ducks);
+        const Page = module[name];
+        return Page && <Page/>;
       }}
     </Bundle>
   );
@@ -62,10 +62,10 @@ export class Bundle extends Component {
     const { load } = this.props;
     const keys = Object.keys(load);
 
-    Promise.all(keys.map(key => load[key]()))
+    Promise.all(keys.map(key => load[key]))
       .then((values) => keys.reduce((memo, key, index) => {
-        //memo[key] = values[index].default ? values[index].default : values[index];
-        memo[key] = values[index];
+        memo[key] = values[index].default ? values[index].default : values[index];
+        //memo[key] = values[index];
         return memo;
       }, {}))
       .then((result) => {
@@ -82,13 +82,3 @@ export class Bundle extends Component {
     return isLoaded ? React.Children.only(this.props.children(mods)) : null;
   }
 }
-
-function promisify(loader) {
-  return () => new Promise((resolve, reject) => {
-    loader((result) => {
-      if(result) return resolve(result);
-      reject();
-    });
-  });
-}
-
