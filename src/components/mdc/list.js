@@ -18,7 +18,7 @@ export class ListItem extends Component {
 
   render() {
     const { 
-      onClick = null 
+      onClick = () => {} 
     } = this.props;
 
     return (

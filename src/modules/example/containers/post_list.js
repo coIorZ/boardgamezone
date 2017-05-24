@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Toolbar from 'components/mdc/toolbar';
+import Headbar from '../components/headbar';
 
 class PostList extends Component {
   render() {
     return (
-      <Toolbar title='Example Module: postlist'>
-        <h1>Post List Page</h1>
-      </Toolbar>
+      <div>
+        <Headbar title='Post List'/>
+        <div>Post List Page</div>
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ import example from './modules/example/routes';
 export default (
   <Router>
     <ScrollToTop>
-      <div>
+      <div className='mdc-typography'>
         {example}
       </div>
     </ScrollToTop>

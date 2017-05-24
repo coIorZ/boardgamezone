@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Toolbar from 'components/mdc/toolbar';
 import Button from 'components/mdc/button';
 import { List, ListItem } from 'components/mdc/list';
+import Headbar from '../components/headbar';
 import Todo from '../components/todo';
 import { 
   getFilteredTodos, getFilter,
@@ -27,27 +27,30 @@ class TodoList extends Component {
     } = this.props;
 
     return (
-      <Toolbar title='Example Module: todolist'>
-        <form className='mdc-textfield mdc-textfield--fullwidth' 
-            onSubmit={this.addTodo}>
-          <input className='mdc-textfield__input'
-              value={term}
-              onChange={this.changeTerm}/>
-        </form>
-        <List>
-          {map(todos, todo => (
-            <ListItem onClick={this.toggleTodo.bind(this, todo.id)}>
-              <Todo {...todo}/>
-            </ListItem>
-          ))}
-        </List>
-        <Button label='all'
-            onClick={this.changeFilter.bind(this, 'ALL')}/>
-        <Button label='completed'
-            onClick={this.changeFilter.bind(this, 'COMPLETED')}/>
-        <Button label='active'
-            onClick={this.changeFilter.bind(this, 'ACTIVE')}/>
-      </Toolbar>
+      <div>
+        <Headbar title='Todo List'/>
+        <div className='mdc-toolbar-fixed-adjust'>
+          <form className='mdc-textfield mdc-textfield--fullwidth' 
+              onSubmit={this.addTodo}>
+            <input className='mdc-textfield__input'
+                value={term}
+                onChange={this.changeTerm}/>
+          </form>
+          <List>
+            {map(todos, todo => (
+              <ListItem onClick={this.toggleTodo.bind(this, todo.id)}>
+                <Todo {...todo}/>
+              </ListItem>
+            ))}
+          </List>
+          <Button label='all'
+              onClick={this.changeFilter.bind(this, 'ALL')}/>
+          <Button label='completed'
+              onClick={this.changeFilter.bind(this, 'COMPLETED')}/>
+          <Button label='active'
+              onClick={this.changeFilter.bind(this, 'ACTIVE')}/>
+        </div>
+      </div>
     );
   }
 

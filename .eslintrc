@@ -28,7 +28,6 @@
           "align": {"afterColon": true, "beforeColon": true, "on": "colon"}, 
           "multiLine": {"afterColon": true, "beforeColon": false}
         }],
-        "max-len": [2, 120, 2],
         "no-console": 0,
         "no-multiple-empty-lines": 2,
         "object-curly-spacing": [2, "always"],

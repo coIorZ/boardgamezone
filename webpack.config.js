@@ -31,7 +31,6 @@ module.exports = {
   },
   externals: {
     'lodash': '_',
-    //'material-components-web' : 'mdc'
   },
   module: {
     rules: [

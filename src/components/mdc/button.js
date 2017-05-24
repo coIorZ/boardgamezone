@@ -9,7 +9,7 @@ export default class Button extends Component {
   render() {
     const {
       label = '',
-      onClick = null
+      onClick = () => {}
     } = this.props;
     
     return (
