@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 
 export default class Toolbar extends Component {
+  static defaultProps = {
+    height      : null,
+    title       : '',
+    icon        : null,
+    onClickIcon : () => {}
+  }
+
   render() {
-    const {
-      height,
-      title = '',
-      icon = null,
-      onClick = () => {}
-    } = this.props;
+    const { height, title, icon, onClickIcon } = this.props;
 
     const iconNode = !icon ? null : (
       <i className='material-icons'
           style={{ paddingRight: 24 }}
-          onClick={onClick}>{icon}</i>
+          onClick={onClickIcon}>{icon}</i>
     );
 
     return (

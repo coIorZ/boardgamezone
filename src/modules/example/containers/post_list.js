@@ -9,7 +9,9 @@ class PostList extends Component {
     return (
       <div>
         <Headbar title='Post List'/>
-        <div>Post List Page</div>
+        <div className='mdc-toolbar-fixed-adjust'>
+          Post List Page
+        </div>
       </div>
     );
   }

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Button from 'components/mdc/button';
-import { List, ListItem } from 'components/mdc/list';
+import { RippleButton } from 'components/mdc/button';
+import { List, RippleListItem } from 'components/mdc/list';
 import Headbar from '../components/headbar';
 import Todo from '../components/todo';
 import { 
@@ -38,17 +38,14 @@ class TodoList extends Component {
           </form>
           <List>
             {map(todos, todo => (
-              <ListItem onClick={this.toggleTodo.bind(this, todo.id)}>
+              <RippleListItem onClick={this.toggleTodo.bind(this, todo.id)}>
                 <Todo {...todo}/>
-              </ListItem>
+              </RippleListItem>
             ))}
           </List>
-          <Button label='all'
-              onClick={this.changeFilter.bind(this, 'ALL')}/>
-          <Button label='completed'
-              onClick={this.changeFilter.bind(this, 'COMPLETED')}/>
-          <Button label='active'
-              onClick={this.changeFilter.bind(this, 'ACTIVE')}/>
+          <RippleButton onClick={this.changeFilter.bind(this, 'ALL')}>all</RippleButton>
+          <RippleButton onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</RippleButton>
+          <RippleButton onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</RippleButton>
         </div>
       </div>
     );

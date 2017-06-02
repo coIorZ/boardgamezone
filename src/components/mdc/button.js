@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import { ripple } from '../../../node_modules/material-components-web/dist/material-components-web.min';
+
+import { withRipple } from 'components/mdc/ripple';
 
 export default class Button extends Component {
-  componentDidMount() {
-    ripple.MDCRipple.attachTo(this.refs.root);
+  static defaultProps = {
+    onClick: () => {}
   }
 
   render() {
-    const {
-      label = '',
-      onClick = () => {}
-    } = this.props;
-    
     return (
       <button className='mdc-button mdc-button--raised' 
           ref='root'
-          onClick={onClick}>
-        {label}
+          onClick={this.props.onClick}>
+        {this.props.children}
       </button>
     );
   }
 }
+
+const RippleButton = withRipple(Button);
+
+export { 
+  Button,
+  RippleButton
+};

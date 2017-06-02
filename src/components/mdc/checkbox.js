@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ checked } = {}) => (
+export default ({ checked }) => (
   <div className='mdc-checkbox'>
     <input type='checkbox' 
         checked={checked}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Toolbar from 'components/mdc/toolbar';
 import Drawer from 'components/mdc/drawer';
+import { List, ListItem } from 'components/mdc/list';
 
 export default class Headbar extends Component {
   state = {
@@ -21,12 +23,21 @@ export default class Headbar extends Component {
 
     return (
       <div>
-        <Drawer active={isDrawerActive}
-            header={headerNode}
-            onClose={this.closeDrawer}/>
         <Toolbar title={title}
             icon='menu'
-            onClick={this.openDrawer}/>
+            onClickIcon={this.openDrawer}/>
+        <Drawer active={isDrawerActive}
+            header={headerNode}
+            onClose={this.closeDrawer}>
+          <List>
+            <Link to='/example/todo-list'>
+              <ListItem><div>todo list</div></ListItem>
+            </Link>
+            <Link to='/example/post-list'>
+              <ListItem><div>post list</div></ListItem>
+            </Link>
+          </List>
+        </Drawer>
       </div>
     );
   }
@@ -36,7 +47,7 @@ export default class Headbar extends Component {
       isDrawerActive: true
     });
   }
-  
+
   closeDrawer = () => {
     this.setState({
       isDrawerActive: false

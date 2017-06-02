@@ -4,7 +4,9 @@ import { drawer } from '../../../node_modules/material-components-web/dist/mater
 export default class Drawer extends Component {
   static defaultProps = {
     onClose : () => {},
-    active  : false
+    onOpen  : () => {},
+    active  : false,
+    header  : null
   }
 
   state = {
@@ -17,12 +19,10 @@ export default class Drawer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.active !== nextProps.active) {
-      if(this.foundation) {
-        if(nextProps.active) {
-          this.foundation.open();
-        } else {
-          this.foundation.close();
-        }
+      if(nextProps.active) {
+        this.foundation.open();
+      } else {
+        this.foundation.close();
       }
     }
   }
@@ -49,9 +49,20 @@ export default class Drawer extends Component {
         this.refs.root.addEventListener(evt, handler);
       }
     },
+    registerDrawerInteractionHandler: (evt, handler) => {
+      if(this.refs.drawer) {
+        this.refs.drawer.addEventListener(evt, handler);
+      }
+    },
+    deregisterDrawerInteractionHandler: (evt, handler) => {
+      if(this.refs.drawer) {
+        this.refs.drawer.addEventListener(evt, handler);
+      }
+    },
     hasClass        : cssClass => this.state.classes.has(cssClass),
     hasNecessaryDom : () => Boolean(this.refs.root),
     notifyClose     : () => this.props.onClose(),
+    notifyOpen      : () => this.props.onOpen(),
     isDrawer        : (el) => el === this.refs.drawer
   })
 
@@ -60,19 +71,16 @@ export default class Drawer extends Component {
       classes
     } = this.state;
 
-    const {
-      header = null
-    } = this.props;
-
     return (
       <div className={[...classes.values()].join(' ')} ref='root'>
         <div className='mdc-temporary-drawer__drawer' ref='drawer'>
           <header className='mdc-temporary-drawer__header'>
             <div className='mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary'>
-              {header}
+              {this.props.header}
             </div>
           </header>
           <nav className='mdc-temporary-drawer__content'>
+            {this.props.children}
           </nav>
         </div>
       </div>
