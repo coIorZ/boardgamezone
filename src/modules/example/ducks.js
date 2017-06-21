@@ -51,8 +51,8 @@ export default {
 /*
 selectors
 */
-export const getTodos = (state) => state.example.todos;
-export const getFilter = (state) => state.example.filter;
+export const getTodos = state => state.example.todos;
+export const getFilter = state => state.example.filter;
 const _getFilteredTodos = (todos, filterStr) => {
   switch (filterStr) {
     case 'COMPLETED':
@@ -64,4 +64,4 @@ const _getFilteredTodos = (todos, filterStr) => {
   }
 };
 export const getFilteredTodos = createSelector(getTodos, getFilter, _getFilteredTodos);
-export const getActiveTodos = createSelector(getTodos, todos => (filter(todos, todo => (!todo.done))));
+export const getActiveTodos = createSelector(getTodos, todos => filter(todos, todo => !todo.done));

@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-
-import { List, ListItem } from 'components/mdc/list';
-import Headbar from '../components/headbar';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <Headbar title='Example'/>
-        <div className='mdc-toolbar-fixed-adjust'>
-          <List>
-            <Link to='/example/todo-list'>
-              <ListItem><div className='mdc-typography--headline'>todo list</div></ListItem>
-            </Link>
-            <Link to='/example/post-list'>
-              <ListItem><div className='mdc-typography--headline'>post list</div></ListItem>
-            </Link>
-          </List>
+        <p>this is home page</p>
+        <div>
+          <Link to='/example/todo-list'>todo list</Link>
+        </div>
+        <div>
+          <Link to='/example/post-list'>post list</Link>
         </div>
       </div>
     );
@@ -29,4 +22,4 @@ function mapStateToProps() {
   return {};
 }
 
-export default withRouter(connect(mapStateToProps)(Home));
+export default connect(mapStateToProps)(Home);

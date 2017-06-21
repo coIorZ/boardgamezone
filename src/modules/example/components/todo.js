@@ -1,13 +1,10 @@
 import React from 'react';
 
-import Checkbox from 'components/mdc/checkbox';
-import FormField from 'components/mdc/form_field';
-
-const Todo = ({ title, done }) => (
-  <FormField>
-    <Checkbox checked={done}/>
+const Todo = ({ title, done, onClick }) => (
+  <div onClick={onClick}>
+    <input type='checkbox' checked={done}/>
     <label>{title}</label>
-  </FormField>
+  </div>
 );
 
 export default Todo;

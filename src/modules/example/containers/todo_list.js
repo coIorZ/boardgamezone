@@ -1,11 +1,7 @@
 import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
-import { RippleButton } from 'components/mdc/button';
-import { List, RippleListItem } from 'components/mdc/list';
-import Headbar from '../components/headbar';
 import Todo from '../components/todo';
 import { 
   getFilteredTodos, getFilter,
@@ -28,34 +24,27 @@ class TodoList extends Component {
 
     return (
       <div>
-        <Headbar title='Todo List'/>
-        <div className='mdc-toolbar-fixed-adjust'>
-          <form className='mdc-textfield mdc-textfield--fullwidth' 
-              onSubmit={this.addTodo}>
-            <input className='mdc-textfield__input'
-                value={term}
-                onChange={this.changeTerm}/>
-          </form>
-          <List>
-            {map(todos, todo => (
-              <RippleListItem onClick={this.toggleTodo.bind(this, todo.id)}>
-                <Todo {...todo}/>
-              </RippleListItem>
-            ))}
-          </List>
-          <RippleButton onClick={this.changeFilter.bind(this, 'ALL')}>all</RippleButton>
-          <RippleButton onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</RippleButton>
-          <RippleButton onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</RippleButton>
-        </div>
+        <p>this is todo list page</p>
+        <form onSubmit={this.addTodo}>
+          <input value={term}
+              onChange={this.changeTerm}/>
+        </form>
+        {map(todos, todo => (
+          <Todo {...todo} 
+              onClick={this.toggleTodo.bind(this, todo.id)}/>
+        ))}
+        <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
+        <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
+        <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
       </div>
     );
   }
 
-  changeTerm = (e) => {
+  changeTerm = e => {
     this.setState({ term: e.target.value });
   }
 
-  addTodo = (e) => {
+  addTodo = e => {
     e.preventDefault();
     if(this.state.term.trim() !== '') {
       this.props.addTodo(this.state.term);
@@ -63,11 +52,11 @@ class TodoList extends Component {
     this.setState({ term: '' });
   }
 
-  toggleTodo = (id) => {
+  toggleTodo = id => {
     this.props.toggleTodo(id);
   }
 
-  changeFilter = (filterStr) => {
+  changeFilter = filterStr => {
     this.props.setFilter(filterStr);
   }
 }
@@ -79,6 +68,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { 
+export default connect(mapStateToProps, { 
   addTodo, setFilter, toggleTodo 
-})(TodoList));
+})(TodoList);

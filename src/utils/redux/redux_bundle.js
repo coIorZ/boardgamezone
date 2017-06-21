@@ -18,13 +18,13 @@ function _createStore(...args) {
 }
 export { _createStore as createStore };
 
-export function bundle(module, name) {
+export function bundle(module, { name, props, ducks = 'ducks' }) {
   return (
     <Bundle load={{ module }}>
       {({ module }) => {
-        injectReducer(module.ducks);
+        injectReducer(module[ducks]);
         const Page = module[name];
-        return Page && <Page/>;
+        return Page ? <Page {...props}/> : null;
       }}
     </Bundle>
   );

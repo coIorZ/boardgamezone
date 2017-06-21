@@ -1,19 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const LodashWebpackPlugin = require('lodash-webpack-plugin');
+//const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
     app: [
       './src/index.js', 
-      'normalize.css',
-      './node_modules/material-components-web/dist/material-components-web.min.css'
+      //'normalize.css',
+      //'./node_modules/material-components-web/dist/material-components-web.min.css'
     ],
     vendor: [
-      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'reselect', 
-      './node_modules/material-components-web/dist/material-components-web.min'
+      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'reselect', 'redux-saga',
+      //'./node_modules/material-components-web/dist/material-components-web.min'
     ]
   },
   output: {
@@ -56,10 +56,10 @@ module.exports = {
       template : './src/views/index.html',
       inject   : true
     }),
-    new LodashWebpackPlugin({
-      collections : true,
-      paths       : true
-    }),
+    //new LodashWebpackPlugin({
+    //  collections : true,
+    //  paths       : true
+    //}),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
@@ -68,6 +68,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new BundleAnalyzerPlugin()
   ]
 };
