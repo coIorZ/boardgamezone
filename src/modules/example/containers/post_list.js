@@ -5,7 +5,7 @@ class PostList extends Component {
   render() {
     return (
       <div>
-        <p>this is post list page</p>
+        <h3>this is post list page</h3>
       </div>
     );
   }

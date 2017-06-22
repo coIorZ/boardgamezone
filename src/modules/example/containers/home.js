@@ -6,13 +6,11 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <p>this is home page</p>
-        <div>
-          <Link to='/example/todo-list'>todo list</Link>
-        </div>
-        <div>
-          <Link to='/example/post-list'>post list</Link>
-        </div>
+        <h3>this is home page</h3>
+        <ul>
+          <li><Link to='/example/todo-list'>todo list</Link></li>
+          <li><Link to='/example/post-list'>post list</Link></li>
+        </ul>
       </div>
     );
   }

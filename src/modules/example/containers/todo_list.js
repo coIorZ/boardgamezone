@@ -2,7 +2,6 @@ import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Todo from '../components/todo';
 import { 
   getFilteredTodos, getFilter,
   addTodo, setFilter, toggleTodo
@@ -14,29 +13,32 @@ class TodoList extends Component {
   }
 
   render() {
-    const {
-      term = ''
-    } = this.state;
-
-    const {
-      todos = {}
-    } = this.props;
+    const { term } = this.state;
+    const { todos } = this.props;
 
     return (
       <div>
-        <p>this is todo list page</p>
+        <h3>this is todo list page</h3>
         <form onSubmit={this.addTodo}>
           <input value={term}
               onChange={this.changeTerm}/>
+          <button type='submit'>add</button>
         </form>
+
+        <ul>
         {map(todos, todo => (
-          <Todo {...todo} 
-              onClick={this.toggleTodo.bind(this, todo.id)}/>
+          <li key={todo.id}
+              onClick={this.toggleTodo.bind(this, todo.id)}>
+            <input type='checkbox' checked={todo.done}/>
+            <label>{todo.title}</label>
+          </li>
         ))}
-        <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
-        <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
-        <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
-      </div>
+      </ul>
+
+      <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
+      <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
+      <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
+    </div>
     );
   }
 
