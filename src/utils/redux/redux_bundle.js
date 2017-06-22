@@ -22,7 +22,9 @@ export function bundle(module, { name, props, ducks = 'ducks' }) {
   return (
     <Bundle load={{ module }}>
       {({ module }) => {
-        injectReducer(module[ducks]);
+        if(!store.reducers.hasOwnProperty(module.__name__)) {
+          injectReducer(module[ducks]);
+        }
         const Page = module[name];
         return Page ? <Page {...props}/> : null;
       }}

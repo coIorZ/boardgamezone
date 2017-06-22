@@ -3,14 +3,16 @@ import { combineReducers } from 'redux';
 import { createAction, handleActions, handleAction } from 'redux-actions';
 import { createSelector } from 'reselect';
 
+export const MODULE_NAME = 'example';
+
 let TODO_ID = 1;
 
 /*
 actions
 */
-const ADD_TODO = 'bgz/example/ADD_TODO';
-const TOGGLE_TODO = 'bgz/example/TOGGLE_TODO';
-const SET_FILTER = 'bgz/example/SET_FILTER';
+const ADD_TODO = `bgz/${MODULE_NAME}/ADD_TODO`;
+const TOGGLE_TODO = `bgz/${MODULE_NAME}/TOGGLE_TODO`;
+const SET_FILTER = `bgz/${MODULE_NAME}/SET_FILTER`;
 
 export const addTodo = createAction(ADD_TODO);
 export const toggleTodo = createAction(TOGGLE_TODO);
@@ -41,7 +43,7 @@ const todosReducer = handleActions({
 const filterReducer = handleAction(SET_FILTER, (state, { payload }) => payload, 'ALL');
 
 export default {
-  example: combineReducers({
+  [MODULE_NAME]: combineReducers({
     todos  : todosReducer,
     filter : filterReducer
   })
@@ -51,8 +53,8 @@ export default {
 /*
 selectors
 */
-export const getTodos = state => state.example.todos;
-export const getFilter = state => state.example.filter;
+export const getTodos = state => state[MODULE_NAME].todos;
+export const getFilter = state => state[MODULE_NAME].filter;
 const _getFilteredTodos = (todos, filterStr) => {
   switch (filterStr) {
     case 'COMPLETED':
