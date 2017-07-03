@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
+import 'normalize.css';
+//import 'babel-polyfill';
 
 import store from './store';
 import routes from './routes';

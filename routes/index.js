@@ -4,10 +4,12 @@ const router = Router();
 
 router.get('/example/test', (req, res) => {
   const data = {
-    route : req.route,
-    foo   : 'bar' 
+    path     : req.route.path,
+    baseUrl  : req.baseUrl,
+    protocol : req.protocol,
+    foo      : 'bar' 
   };
-  req.log.debug('example/test api result:', data);
+  req.log.debug('[example/test] result:', data);
   res.status(200).json({
     path : '/example/test',
     foo  : 'bar'
