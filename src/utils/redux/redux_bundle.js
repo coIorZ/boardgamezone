@@ -4,9 +4,10 @@ import { combineReducers, createStore } from 'redux';
 let store;
 
 export function injectReducer(reducer) {
+  if(Object.keys(store.reducers).includes(reducer.__name__)) return;
   store.reducers = {
     ...store.reducers,
-    ...reducer
+    [reducer.__name__]: reducer
   };
   store.replaceReducer(combineReducers(store.reducers));
 }
@@ -18,13 +19,11 @@ function _createStore(...args) {
 }
 export { _createStore as createStore };
 
-export function bundle(module, { name, props, ducks = 'ducks' }) {
+export function bundle(module, { name, props, reducers = 'reducers' }) {
   return (
     <Bundle load={{ module }}>
       {({ module }) => {
-        if(!store.reducers.hasOwnProperty(module.__name__)) {
-          injectReducer(module[ducks]);
-        }
+        injectReducer(module[reducers]);
         const Page = module[name];
         return Page ? <Page {...props}/> : null;
       }}

@@ -2,10 +2,8 @@ import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { 
-  getFilteredTodos, getFilter,
-  addTodo, setFilter, toggleTodo
-} from '../ducks';
+import { addTodo, setFilter, toggleTodo } from '../ducks/actions';
+import { getFilteredTodos, getFilter } from '../ducks/selectors';
 
 class TodoList extends Component {
   state = {

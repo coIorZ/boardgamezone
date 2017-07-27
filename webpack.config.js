@@ -12,7 +12,7 @@ module.exports = {
       //'./node_modules/material-components-web/dist/material-components-web.min.css'
     ],
     vendor: [
-      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'reselect', 'redux-saga',
+      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 'reselect', 'redux-observable'
       //'./node_modules/material-components-web/dist/material-components-web.min'
     ]
   },
@@ -26,6 +26,7 @@ module.exports = {
     alias: {
       common     : path.resolve(__dirname, 'common'),
       components : path.resolve(__dirname, 'src', 'components'),
+      modules    : path.resolve(__dirname, 'src', 'modules'),
       utils      : path.resolve(__dirname, 'src', 'utils')
     }
   },

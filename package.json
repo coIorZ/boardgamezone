@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node_modules/.bin/eslint .",
     "build": "node_modules/.bin/webpack -p --watch",
-    "start": "node_modules/.bin/nodemon app.js --exec babel-node"
+    "start": "node_modules/.bin/nodemon server/app.js --exec babel-node"
   },
   "keywords": [
     "board",
@@ -20,7 +20,6 @@
     "express": "^4.15.2",
     "express-useragent": "^1.0.7",
     "lodash": "^4.17.4",
-    "material-components-web": "^0.11.1",
     "material-design-icons": "^3.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -28,8 +27,9 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-actions": "^2.0.2",
-    "redux-saga": "^0.14.8",
+    "redux-observable": "^0.14.1",
     "reselect": "^3.0.0",
+    "rxjs": "^5.4.2",
     "serve-favicon": "^2.4.3",
     "uuid": "^3.0.1",
     "winston": "^2.3.1"
@@ -53,6 +53,7 @@
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
     "lodash-webpack-plugin": "^0.11.3",
+    "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
     "normalize.css": "^7.0.0",
     "pre-commit": "^1.2.2",
