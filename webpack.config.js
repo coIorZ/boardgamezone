@@ -1,20 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const LodashWebpackPlugin = require('lodash-webpack-plugin');
+const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
     app: [
       './src/index.js', 
-      //'normalize.css',
-      //'./node_modules/material-components-web/dist/material-components-web.min.css'
+      'normalize.css',
+      'babel-polyfill',
     ],
     vendor: [
       'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 
-      'reselect', 'redux-observable', 
-      //'./node_modules/material-components-web/dist/material-components-web.min'
+      'reselect', 'redux-observable', 'lodash', 'rxjs',
     ]
   },
   output: {
@@ -30,9 +29,6 @@ module.exports = {
       modules    : path.resolve(__dirname, 'src', 'modules'),
       utils      : path.resolve(__dirname, 'src', 'utils')
     }
-  },
-  externals: {
-    'lodash': '_',
   },
   module: {
     rules: [
@@ -58,10 +54,9 @@ module.exports = {
       template : './src/views/index.html',
       inject   : true
     }),
-    //new LodashWebpackPlugin({
-    //  collections : true,
-    //  paths       : true
-    //}),
+    new LodashWebpackPlugin({
+      collections: true,
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
