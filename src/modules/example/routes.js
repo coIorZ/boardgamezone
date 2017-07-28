@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { bundle } from 'utils/redux/redux_bundle';
+import { bundle } from 'utils/redux_bundle';
 
-const getComp = name => props => bundle(import(/* webpackChunkName: "example" */ './index'), { name, props }); 
+const getComp = name => bundle(import(/* webpackChunkName: "example" */ './index'), { name }); 
 
 export default (
   <Switch>

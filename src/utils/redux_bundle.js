@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import { combineReducers, createStore } from 'redux';
+import { combineReducers } from 'redux';
 
-let store;
+import store from '../store';
+import { epic$ } from '../epic';
 
-export function injectReducer(reducer) {
-  if(Object.keys(store.reducers).includes(reducer.__name__)) return;
-  store.reducers = {
-    ...store.reducers,
-    [reducer.__name__]: reducer
+let reducers = {};
+let loaded = [];
+
+function injectReducer(name, reducer) {
+  if(Object.keys(reducers).includes(name)) return;
+  reducers = {
+    ...reducers,
+    [name]: reducer
   };
-  store.replaceReducer(combineReducers(store.reducers));
+  store.replaceReducer(combineReducers(reducers));
 }
 
-function _createStore(...args) {
-  store = createStore.apply(this, args);
-  store.reducers = {};
-  return store;
+function injectEpic(epic) {
+  epic$.next(epic);
 }
-export { _createStore as createStore };
 
-export function bundle(module, { name, props, reducers = 'reducers' }) {
-  return (
+function injectDep({ reducers, epics, __name__ } = {}) {
+  if(loaded.includes(__name__)) return;
+  loaded.push(__name__);
+  injectReducer(__name__, reducers);
+  injectEpic(epics);
+}
+
+export function bundle(module, { name }) {
+  return props => (
     <Bundle load={{ module }}>
       {({ module }) => {
-        injectReducer(module[reducers]);
+        injectDep(module);
         const Page = module[name];
         return Page ? <Page {...props}/> : null;
       }}

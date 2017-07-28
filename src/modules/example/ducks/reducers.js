@@ -25,9 +25,7 @@ const todosReducer = handleActions({
 
 const filterReducer = handleAction(types.SET_FILTER, (state, { payload }) => payload, 'ALL');
 
-let reducer = combineReducers({
+export default combineReducers({
   todos  : todosReducer,
   filter : filterReducer
 });
-reducer.__name__ = 'example';
-export default reducer;

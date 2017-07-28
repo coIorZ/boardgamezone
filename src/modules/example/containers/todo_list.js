@@ -2,7 +2,7 @@ import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo, setFilter, toggleTodo } from '../ducks/actions';
+import { addTodo, setFilter, setFilterAsync, toggleTodo } from '../ducks/actions';
 import { getFilteredTodos, getFilter } from '../ducks/selectors';
 
 class TodoList extends Component {
@@ -57,7 +57,7 @@ class TodoList extends Component {
   }
 
   changeFilter = filterStr => {
-    this.props.setFilter(filterStr);
+    this.props.setFilterAsync(filterStr);
   }
 }
 
@@ -69,5 +69,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { 
-  addTodo, setFilter, toggleTodo 
+  addTodo, setFilter, toggleTodo, setFilterAsync,
 })(TodoList);
