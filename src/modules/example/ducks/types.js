@@ -1,9 +1,9 @@
-const MODULE_NAME = 'example';
+import { __name__ as name } from '../index';
 
-const ADD_TODO = `bgz/${MODULE_NAME}/ADD_TODO`;
-const TOGGLE_TODO = `bgz/${MODULE_NAME}/TOGGLE_TODO`;
-const SET_FILTER = `bgz/${MODULE_NAME}/SET_FILTER`;
-const SET_FILTER_ASYNC = `bgz/${MODULE_NAME}/SET_FILTER_ASYNC`;
+const ADD_TODO = `bgz/${name}/ADD_TODO`;
+const TOGGLE_TODO = `bgz/${name}/TOGGLE_TODO`;
+const SET_FILTER = `bgz/${name}/SET_FILTER`;
+const SET_FILTER_ASYNC = `bgz/${name}/SET_FILTER_ASYNC`;
 
 export default {
   ADD_TODO,
