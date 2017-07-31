@@ -5,6 +5,7 @@ const s = f => state => f(state['example']);
 
 export const getTodos = s(state => state.todos);
 export const getFilter = s(state => state.filter);
+export const getKeyword = s(state => state.keyword);
 const _getFilteredTodos = (todos, filterStr) => {
   switch (filterStr) {
     case 'COMPLETED':
@@ -16,4 +17,6 @@ const _getFilteredTodos = (todos, filterStr) => {
   }
 };
 export const getFilteredTodos = createSelector(getTodos, getFilter, _getFilteredTodos);
-export const getActiveTodos = createSelector(getTodos, todos => filter(todos, todo => !todo.done));
+const _getKeywordTodos = (todos, keyword) => 
+  keyword ? filter(todos, todo => todo.title.includes(keyword)) : todos;
+export const getKeywordTodos = createSelector(getTodos, getKeyword, _getKeywordTodos);

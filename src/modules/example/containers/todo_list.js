@@ -24,19 +24,19 @@ class TodoList extends Component {
         </form>
 
         <ul>
-        {map(todos, todo => (
-          <li key={todo.id}
-              onClick={this.toggleTodo.bind(this, todo.id)}>
-            <input type='checkbox' checked={todo.done}/>
-            <label>{todo.title}</label>
-          </li>
-        ))}
-      </ul>
+          {map(todos, todo => (
+            <li key={todo.id}
+                onClick={this.toggleTodo.bind(this, todo.id)}>
+              <input type='checkbox' checked={todo.done}/>
+              <label>{todo.title}</label>
+            </li>
+          ))}
+        </ul>
 
-      <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
-      <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
-      <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
-    </div>
+        <button onClick={this.changeFilter.bind(this, 'ALL')}>all</button>
+        <button onClick={this.changeFilter.bind(this, 'COMPLETED')}>completed</button>
+        <button onClick={this.changeFilter.bind(this, 'ACTIVE')}>active</button>
+      </div>
     );
   }
 
@@ -61,13 +61,10 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
+export default connect(
+  state => ({
     todos  : getFilteredTodos(state),
     filter : getFilter(state)
-  };
-}
-
-export default connect(mapStateToProps, { 
-  addTodo, setFilter, toggleTodo, setFilterAsync,
-})(TodoList);
+  }),
+  { addTodo, setFilter, toggleTodo, setFilterAsync }
+)(TodoList);

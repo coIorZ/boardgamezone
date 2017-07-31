@@ -1,15 +1,15 @@
 import { combineEpics } from 'redux-observable';
 
-import types from './types';
+import { SET_KEYWORD_DEBOUNCED } from './types';
+import { setKeyword } from './actions';
 
-const filterEpic = action$ => 
-  action$.ofType(types.SET_FILTER_ASYNC)
-    .delay(1000)
-    .map(action => ({
-      type    : types.SET_FILTER,
-      payload : action.payload
-    }));
+const keywordEpic = action$ => 
+  action$.ofType(SET_KEYWORD_DEBOUNCED)
+    .map(action => action.payload)
+    .debounceTime(500)
+    .distinctUntilChanged()
+    .map(setKeyword);
 
 export default combineEpics(
-  filterEpic
+  keywordEpic
 );
