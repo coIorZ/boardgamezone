@@ -30,14 +30,14 @@ const colors = {
   green  : '\x1b[32m',
   yellow : '\x1b[33m',
   red    : '\x1b[31m',
-  cyan   : '\x1b[36m'
+  cyan   : '\x1b[36m',
 };
 
 const statusCodeColors = {
   2 : colors.green,
   3 : colors.cyan,
   4 : colors.yellow,
-  5 : colors.red
+  5 : colors.red,
 };
 
 const wrapReqId = logger => id => 

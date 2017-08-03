@@ -14,21 +14,21 @@ module.exports = {
     vendor: [
       'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 
       'reselect', 'redux-observable', 'lodash', 'rxjs',
-    ]
+    ],
   },
   output: {
     path          : path.resolve(__dirname, 'dist'),
     filename      : 'js/[name].js',
     publicPath    : '/',
-    chunkFilename : 'js/[name].js'
+    chunkFilename : 'js/[name].js',
   },
   resolve: {
     alias: {
       common     : path.resolve(__dirname, 'common'),
       components : path.resolve(__dirname, 'src', 'components'),
       modules    : path.resolve(__dirname, 'src', 'modules'),
-      utils      : path.resolve(__dirname, 'src', 'utils')
-    }
+      utils      : path.resolve(__dirname, 'src', 'utils'),
+    },
   },
   module: {
     rules: [
@@ -36,36 +36,36 @@ module.exports = {
         use     : ['babel-loader'],
         test    : /\.js$/,
         exclude : /node_modules/,
-        include : path.resolve(__dirname, 'src')
+        include : path.resolve(__dirname, 'src'),
       },
       {
         use  : ['style-loader', 'css-loader', 'sass-loader'],
-        test : /\.s?css$/
+        test : /\.s?css$/,
       },
       {
         use  : ['url-loader?limit=40000'],
-        test : /\.(jpe?g|png|gif|svg)$/
-      }
-    ]
+        test : /\.(jpe?g|png|gif|svg)$/,
+      },
+    ],
   },
   devtool : 'source-map',
   plugins : [
     new HtmlWebpackPlugin({
       template : './src/views/index.html',
-      inject   : true
+      inject   : true,
     }),
     new LodashWebpackPlugin({
       collections: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: 'vendor',
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
+        'NODE_ENV': JSON.stringify('production'),
+      },
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new BundleAnalyzerPlugin()
-  ]
+    new BundleAnalyzerPlugin(),
+  ],
 };

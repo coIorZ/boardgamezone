@@ -9,7 +9,7 @@ const customLevels = {
   info  : [3, 'green'],
   warn  : [2, 'yellow'],
   error : [1, 'red'],
-  fatal : [0, 'red']
+  fatal : [0, 'red'],
 };
 
 let logger = new (winston.Logger)({
@@ -21,10 +21,10 @@ let logger = new (winston.Logger)({
       level       : 'trace',
       colorize    : true,
       prettyPrint : true,
-      timestamp   : formatTimeStamp
-    })
+      timestamp   : formatTimeStamp,
+    }),
     //new (winston.transports.File)({ filename: 'somefile.log' })
-  ]
+  ],
 });
 
 export default logger;

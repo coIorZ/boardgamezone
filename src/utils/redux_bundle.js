@@ -11,7 +11,7 @@ function injectReducer(name, reducer) {
   if(Object.keys(reducers).includes(name)) return;
   reducers = {
     ...reducers,
-    [name]: reducer
+    [name]: reducer,
   };
   store.replaceReducer(combineReducers(reducers));
 }
@@ -42,7 +42,7 @@ export function bundle(module, { name }) {
 export class Bundle extends Component {
   state = {
     isLoaded : false,
-    mods     : null
+    mods     : null,
   }
 
   componentDidMount() {
@@ -65,7 +65,7 @@ export class Bundle extends Component {
 
   load() {
     this.setState({
-      isLoaded: false
+      isLoaded: false,
     });
 
     const { load } = this.props;
@@ -81,7 +81,7 @@ export class Bundle extends Component {
         if(!this._isMounted) return null;
         this.setState({
           isLoaded : true,
-          mods     : result
+          mods     : result,
         });
       });
   }
