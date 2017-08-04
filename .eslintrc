@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest/globals": true
     },
     "extends": [
         "eslint:recommended"
@@ -18,10 +19,18 @@
     "plugins": [
         "standard",
         "promise",
-        "react"
+        "react",
+        "jest"
     ],
     "rules": {
         "comma-spacing": [2, {"after": true, "before": false}],
+        "comma-dangle": [2, {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "always-multiline",
+        }],
         "indent": [2, 2, {"SwitchCase": 1}],
         "jsx-quotes": [2, "prefer-single"],
         "key-spacing": [2, {
@@ -33,7 +42,6 @@
         "object-curly-spacing": [2, "always"],
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
-        "react/jsx-indent-props": 1,
         "semi": 2,
         "space-infix-ops": [2, {"int32Hint": true}]
     }

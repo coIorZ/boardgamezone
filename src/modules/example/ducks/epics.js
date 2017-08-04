@@ -1,15 +1,17 @@
 import { combineEpics } from 'redux-observable';
 
-import { SET_KEYWORD_DEBOUNCED } from './types';
+import { EDIT_KEYWORD } from './types';
 import { setKeyword } from './actions';
 
-const keywordEpic = action$ => 
-  action$.ofType(SET_KEYWORD_DEBOUNCED)
-    .map(action => action.payload)
-    .debounceTime(500)
+const getKeywordEpic = debounceTime => action$ => 
+  action$.ofType(EDIT_KEYWORD)
+    .map(({ payload }) => payload)
+    .debounceTime(debounceTime)
     .distinctUntilChanged()
-    .map(setKeyword);
+    .map(value => setKeyword(value));
+
+const keywordEpic = getKeywordEpic(500);
 
 export default combineEpics(
-  keywordEpic
+  keywordEpic,
 );

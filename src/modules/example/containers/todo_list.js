@@ -2,12 +2,13 @@ import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo, setFilter, setFilterAsync, toggleTodo } from '../ducks/actions';
+import { addTodo, setFilter, toggleTodo } from '../ducks/actions';
 import { getFilteredTodos, getFilter } from '../ducks/selectors';
+import TodoItem from '../components/todo_item';
 
-class TodoList extends Component {
+export class TodoList extends Component {
   state = {
-    term: ''
+    term: '',
   }
 
   render() {
@@ -19,17 +20,14 @@ class TodoList extends Component {
         <h3>this is todo list page</h3>
         <form onSubmit={this.addTodo}>
           <input value={term}
-              onChange={this.changeTerm}/>
+            onInput={this.changeTerm}/>
           <button type='submit'>add</button>
         </form>
 
         <ul>
           {map(todos, todo => (
-            <li key={todo.id}
-                onClick={this.toggleTodo.bind(this, todo.id)}>
-              <input type='checkbox' checked={todo.done}/>
-              <label>{todo.title}</label>
-            </li>
+            <TodoItem key={todo.id} todo={todo}
+              onClick={this.toggleTodo.bind(this, todo.id)}/>
           ))}
         </ul>
 
@@ -57,14 +55,14 @@ class TodoList extends Component {
   }
 
   changeFilter = filterStr => {
-    this.props.setFilterAsync(filterStr);
+    this.props.setFilter(filterStr);
   }
 }
 
 export default connect(
   state => ({
     todos  : getFilteredTodos(state),
-    filter : getFilter(state)
+    filter : getFilter(state),
   }),
-  { addTodo, setFilter, toggleTodo, setFilterAsync }
+  { addTodo, setFilter, toggleTodo },
 )(TodoList);

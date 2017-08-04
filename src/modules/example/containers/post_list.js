@@ -2,12 +2,12 @@ import { map } from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setKeywordDebounced } from '../ducks/actions';
+import { editKeyword } from '../ducks/actions';
 import { getKeywordTodos } from '../ducks/selectors';
 
-class PostList extends Component {
+export class PostList extends Component {
   state = {
-    term: ''
+    term: '',
   }
 
   render() {
@@ -18,7 +18,7 @@ class PostList extends Component {
       <div>
         <h3>this is post list page</h3>
         <input value={term}
-            onInput={this.setKeyword}/>
+          onInput={this.editKeyword}/>
         <ul>
           {map(todos, todo => (
             <li key={todo.id}>{todo.title}</li>
@@ -28,17 +28,17 @@ class PostList extends Component {
     );
   }
 
-  setKeyword = e => {
+  editKeyword = e => {
     this.setState({
-      term: e.target.value
+      term: e.target.value,
     });
-    this.props.setKeywordDebounced(e.target.value);
+    this.props.editKeyword(e.target.value);
   }
 }
 
 export default connect(
   state => ({
-    todos: getKeywordTodos(state)
+    todos: getKeywordTodos(state),
   }),
-  { setKeywordDebounced }
+  { editKeyword },
 )(PostList);
