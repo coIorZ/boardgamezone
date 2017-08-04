@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { editKeyword } from '../ducks/actions';
 import { getKeywordTodos } from '../ducks/selectors';
+import TodoItem from '../components/todo_item';
 
 export class PostList extends Component {
   state = {
@@ -21,7 +22,7 @@ export class PostList extends Component {
           onInput={this.editKeyword}/>
         <ul>
           {map(todos, todo => (
-            <li key={todo.id}>{todo.title}</li>
+            <TodoItem key={todo.id} title={todo.title} checked={todo.done}/>
           ))}
         </ul>
       </div>

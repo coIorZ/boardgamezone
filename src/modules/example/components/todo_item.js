@@ -1,8 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export default ({ todo = {}, onClick = () => {} }) => (
+export default ({ title = '', checked = false, onClick = () => {} }) => (
   <li onClick={onClick}>
-    <input type='checkbox' checked={todo.done}/>
-    <label>{todo.title}</label>
+    <Item checked={checked}>{title}</Item>
   </li>
 );
+
+const Item = styled.span`
+  text-decoration: ${props => props.checked ? 'line-through' : 'none'};
+`;

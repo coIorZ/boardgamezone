@@ -1,6 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import renderer from 'react-test-renderer';
 
 import testEpic from '../../../utils/test_epic';
 import { editKeyword, setKeyword, addTodo, toggleTodo, setFilter } from './actions';
@@ -8,7 +7,7 @@ import reducers from './reducers';
 import { getTodos, getFilteredTodos, getKeywordTodos } from './selectors';
 import epics from './epics';
 import { TodoList } from '../containers/todo_list';
-//import TodoItem from '../components/todo_item';
+import { PostList } from '../containers/post_list';
 
 const createState = ({
   todos = {},
@@ -72,19 +71,55 @@ describe('# example module', () => {
     });
 
     describe('getTodos()', () => {
-      it('should get todos', () => {
+      it('should get all todos', () => {
         expect(getTodos(store)).toMatchSnapshot();
       });
     });
 
     describe('getFilteredTodos()', () => {
-      it('should get filtered todos', () => {
+      it('should get all todos', () => {
+        const store = createStore({
+          todos: {
+            1 : { id: 1, title: 'another todo', done: false },
+            2 : { id: 2, title: 'yet another todo', done: true },
+          },
+          filter  : 'ALL',
+          keyword : 'ye',
+        });
+        expect(getFilteredTodos(store)).toMatchSnapshot();
+      });
+
+      it('should get completed todos', () => {
+        expect(getFilteredTodos(store)).toMatchSnapshot();
+      });
+
+      it('should get active todos', () => {
+        const store = createStore({
+          todos: {
+            1 : { id: 1, title: 'another todo', done: false },
+            2 : { id: 2, title: 'yet another todo', done: true },
+          },
+          filter  : 'ACTIVE',
+          keyword : 'ye',
+        });
         expect(getFilteredTodos(store)).toMatchSnapshot();
       });
     });
 
     describe('getKeywordTodos()', () => {
       it('should get todos by keyword', () => {
+        expect(getKeywordTodos(store)).toMatchSnapshot();
+      });
+
+      it('should get all todos when keyword is empty', () => {
+        const store = createStore({
+          todos: {
+            1 : { id: 1, title: 'another todo', done: false },
+            2 : { id: 2, title: 'yet another todo', done: true },
+          },
+          filter  : 'ACTIVE',
+          keyword : '',
+        });
         expect(getKeywordTodos(store)).toMatchSnapshot();
       });
     });
@@ -153,8 +188,10 @@ describe('# example module', () => {
   describe('views', () => {
     describe('<TodoList/>', () => {
       it('should match its empty snapshot', () => {
-        const tree = shallow(<TodoList/>);
-        expect(toJson(tree)).toMatchSnapshot();
+        const tree = renderer.create(
+          <TodoList/>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
       });
 
       it('should match its snapshot with todos', () => {
@@ -162,8 +199,30 @@ describe('# example module', () => {
           1 : { id: 1, title: 'hello world', done: false },
           2 : { id: 2, title: 'another world', done: true },
         };
-        const tree = shallow(<TodoList todos={todos}/>);
-        expect(toJson(tree)).toMatchSnapshot();
+        const tree = renderer.create(
+          <TodoList todos={todos}/>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+      });
+    });
+
+    describe('<PostList/>', () => {
+      it('should match its empty snapshot', () => {
+        const tree = renderer.create(
+          <PostList/>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should match its snapshot with todos', () => {
+        const todos = {
+          1 : { id: 1, title: 'hello world', done: false },
+          2 : { id: 2, title: 'another world', done: true },
+        };
+        const tree = renderer.create(
+          <PostList todos={todos}/>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
       });
     });
   });

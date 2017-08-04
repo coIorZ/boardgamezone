@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { addTodo, setFilter, toggleTodo } from '../ducks/actions';
-import { getFilteredTodos, getFilter } from '../ducks/selectors';
+import { getFilteredTodos } from '../ducks/selectors';
 import TodoItem from '../components/todo_item';
 
 export class TodoList extends Component {
@@ -26,7 +26,7 @@ export class TodoList extends Component {
 
         <ul>
           {map(todos, todo => (
-            <TodoItem key={todo.id} todo={todo}
+            <TodoItem key={todo.id} title={todo.title} checked={todo.done}
               onClick={this.toggleTodo.bind(this, todo.id)}/>
           ))}
         </ul>
@@ -61,8 +61,7 @@ export class TodoList extends Component {
 
 export default connect(
   state => ({
-    todos  : getFilteredTodos(state),
-    filter : getFilter(state),
+    todos: getFilteredTodos(state),
   }),
   { addTodo, setFilter, toggleTodo },
 )(TodoList);
