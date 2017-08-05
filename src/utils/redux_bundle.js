@@ -7,37 +7,33 @@ import { epic$ } from '../epic';
 let reducers = {};
 let loaded = [];
 
-function injectReducer(name, reducer) {
+const injectReducer = (name, reducer) => {
   if(Object.keys(reducers).includes(name)) return;
   reducers = {
     ...reducers,
     [name]: reducer,
   };
   store.replaceReducer(combineReducers(reducers));
-}
+};
 
-function injectEpic(epic) {
-  epic$.next(epic);
-}
+const injectEpic = epic => epic$.next(epic);
 
-function injectDep({ reducers, epics, __name__ } = {}) {
+const injectDep = ({ reducers, epics, __name__ } = {}) => {
   if(loaded.includes(__name__)) return;
   loaded.push(__name__);
-  injectReducer(__name__, reducers);
-  injectEpic(epics);
-}
+  reducers && injectReducer(__name__, reducers);
+  epics && injectEpic(epics);
+};
 
-export function bundle(module, { name }) {
-  return props => (
-    <Bundle load={{ module }}>
-      {({ module }) => {
-        injectDep(module);
-        const Page = module[name];
-        return Page ? <Page {...props}/> : null;
-      }}
-    </Bundle>
-  );
-}
+export const bundle = (module, { name }) => props => (
+  <Bundle load={{ module }}>
+    {({ module }) => {
+      injectDep(module);
+      const Page = module[name];
+      return Page ? <Page {...props}/> : null;
+    }}
+  </Bundle>
+);
 
 export class Bundle extends Component {
   state = {
