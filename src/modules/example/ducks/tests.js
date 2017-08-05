@@ -128,17 +128,17 @@ describe('# example module', () => {
   describe('epics', () => {
     describe('keywordEpic()', () => {
       it('should dispatch correct actions when interval > 500 with distinct values', () => testEpic({
-        setup: action$ => {
+        setup(action$) {
           return epics(action$);
         },
-        test: input$ => {
+        test(input$) {
           input$.next(editKeyword('12'));
           setTimeout(() => {
             input$.next(editKeyword('123'));
             input$.complete();
           }, 510);
         },
-        expect: actions => {
+        expect(actions) {
           expect(actions).toEqual([
             setKeyword('12'),
             setKeyword('123'),
@@ -147,17 +147,17 @@ describe('# example module', () => {
       }));
 
       it('should dispatch correct actions when interval > 500 with same values', () => testEpic({
-        setup: action$ => {
+        setup(action$) {
           return epics(action$);
         },
-        test: input$ => {
+        test(input$) {
           input$.next(editKeyword('12'));
           setTimeout(() => {
             input$.next(editKeyword('12'));
             input$.complete();
           }, 510);
         },
-        expect: actions => {
+        expect(actions) {
           expect(actions).toEqual([
             setKeyword('12'),
           ]);
@@ -165,10 +165,10 @@ describe('# example module', () => {
       }));
 
       it('should dispatch correct actions when interval < 500', () => testEpic({
-        setup: action$ => {
+        setup(action$) {
           return epics(action$);
         },
-        test: input$ => {
+        test(input$) {
           input$.next(editKeyword('12'));
           input$.next(editKeyword('123'));
           setTimeout(() => {
@@ -176,7 +176,7 @@ describe('# example module', () => {
             input$.complete();
           }, 490);
         },
-        expect: actions => {
+        expect(actions) {
           expect(actions).toEqual([
             setKeyword('1234'),
           ]);
