@@ -16,8 +16,6 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {};
-}
-
-export default connect(mapStateToProps)(Home);
+export default connect(
+  () => ({}),
+)(Home);
