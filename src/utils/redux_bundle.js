@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { combineReducers } from 'redux';
 
 import store from '../store';
-import { epic$ } from '../epic';
+import { epic$ } from '../store/epic';
 
 let reducers = {};
 let loaded = [];
