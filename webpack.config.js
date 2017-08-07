@@ -13,7 +13,8 @@ module.exports = {
     ],
     vendor: [
       'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 
-      'reselect', 'redux-observable', 'lodash', 'rxjs',
+      'reselect', 'redux-observable', 'lodash', 'rxjs', 'styled-components',
+      './src/components/styled',
     ],
   },
   output: {

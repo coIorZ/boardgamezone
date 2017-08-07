@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
+import { injectGlobal } from 'styled-components';
 
 import store from './store';
 import routes from './routes';
@@ -11,3 +12,15 @@ ReactDom.render(
   </Provider>,
   document.getElementById('app'),
 );
+
+injectGlobal`
+  html {
+    font-size: 10px;
+  }
+
+  body {
+    background-color: #111113;
+    color: #ffffff;
+    font-size: 1.4rem;
+  }
+`;
