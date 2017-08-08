@@ -1,6 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import Base from './base';
+import Base, { baseStyles } from './base';
 
 const buttonBackgroundColor = props => {
   if(props.green) return '#1db954';
@@ -35,7 +37,8 @@ const RaisedButton = Base.withComponent('button').extend`
   }
 `;
 
-const LinkButton = Base.withComponent('button').extend`
+const LinkButton = styled(Link)`
+  ${baseStyles}
   outline: none;
   border: none;
   border-bottom: 1px solid transparent;
@@ -46,6 +49,7 @@ const LinkButton = Base.withComponent('button').extend`
   padding: 0;
   font-weight: 100;
   cursor: pointer;
+  text-decoration: none;
   &:hover {
     border-bottom: 1px solid #ffffff;
   }

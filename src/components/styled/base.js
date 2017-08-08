@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export default styled.div`
+export const baseStyles = css`
   ${props => props['absolute'] && 'position: absolute;'}
   ${props => props['relative'] && 'position: relative;'}
 
@@ -52,4 +52,8 @@ export default styled.div`
   ${props => props['p-right'] && 'padding-right: 2rem;'}
   ${props => props['p-right-lg'] && 'padding-right: 3rem;'}
   ${props => props['p-right-xl'] && 'padding-right: 4rem;'}
+`;
+
+export default styled.div`
+  ${baseStyles}
 `;

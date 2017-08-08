@@ -22,7 +22,7 @@ const Inner = Base.withComponent('div').extend`
   background-color: ${props => props.checked ? '#ffffff' : '#a0a0a0'};
   border-radius: 100%;
   box-shadow: 0 0 .3rem 0 #000000;
-  transition: background-color .5s, left .3s, width .2s;
+  transition: background-color .5s, left .4s, width .2s;
   &:hover {
     background-color: #ffffff;
   }

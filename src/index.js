@@ -19,8 +19,6 @@ injectGlobal`
   }
 
   body {
-    background-color: #111113;
-    color: #ffffff;
     font-size: 1.4rem;
   }
 `;

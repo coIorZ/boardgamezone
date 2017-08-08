@@ -16,3 +16,9 @@ export const Placeholder = Base.withComponent('div').extend`
   ${props => props.lg && 'height: 10rem;'}
   ${props => props.xl && 'height: 15rem;'}
 `;
+
+export const Main = Base.withComponent('div').extend`
+  background-color: #111113;
+  color: #ffffff;
+  min-height: 100vh;
+`;
