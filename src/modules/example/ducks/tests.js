@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import testEpic from '../../../utils/test_epic';
+import { testEpic, mock } from '../../../utils/test_helper';
 import { editKeyword, setKeyword, addTodo, toggleTodo, setFilter } from './actions';
 import reducers from './reducers';
 import { getTodos, getFilteredTodos, getKeywordTodos } from './selectors';
@@ -9,32 +9,28 @@ import epics from './epics';
 import { TodoList } from '../containers/todo_list';
 import { PostList } from '../containers/post_list';
 
-const createState = ({
-  todos = {},
-  filter = 'ALL',
-  keyword = '',
-} = {}) => ({ todos, filter, keyword });
-
-const createStore = (...args) => ({
-  example: createState(...args),
-});
+const { mockState, mockStore } = mock({
+  todos   : {},
+  filter  : 'ALL',
+  keyword : '',
+}, 'example');
 
 describe('# example module', () => {
   describe('reducers', () => {
     it('should match its initial state', () => {
-      expect(reducers(undefined, {})).toEqual(createState());
+      expect(reducers(undefined, {})).toEqual(mockState());
     });
 
     describe('todosReducer()', () => {
       it('should add some todos', () => {
-        let state = reducers(createState(), addTodo('first todo'));
+        let state = reducers(mockState(), addTodo('first todo'));
         expect(state).toMatchSnapshot();
         state = reducers(state, addTodo('second todo'));
         expect(state).toMatchSnapshot();
       });
 
       it('should toggle a todo', () => {
-        let state = createState({
+        let state = mockState({
           todos: {
             1: { id: 1, title: 'first todo', done: false },
           },
@@ -47,21 +43,21 @@ describe('# example module', () => {
 
     describe('filterReducer()', () => {
       it('should set filter', () => {
-        let state = reducers(createState(), setFilter('COMPLETED'));
+        let state = reducers(mockState(), setFilter('COMPLETED'));
         expect(state).toMatchSnapshot();
       });
     });
 
     describe('keywordReducer()', () => {
       it('should set keyword', () => {
-        let state = reducers(createState(), setKeyword('todo'));
+        let state = reducers(mockState(), setKeyword('todo'));
         expect(state).toMatchSnapshot();
       });
     });
   });
 
   describe('selectors', () => {
-    const store = createStore({
+    const store = mockStore({
       todos: {
         1 : { id: 1, title: 'another todo', done: false },
         2 : { id: 2, title: 'yet another todo', done: true },
@@ -78,7 +74,7 @@ describe('# example module', () => {
 
     describe('getFilteredTodos()', () => {
       it('should get all todos', () => {
-        const store = createStore({
+        const store = mockStore({
           todos: {
             1 : { id: 1, title: 'another todo', done: false },
             2 : { id: 2, title: 'yet another todo', done: true },
@@ -94,7 +90,7 @@ describe('# example module', () => {
       });
 
       it('should get active todos', () => {
-        const store = createStore({
+        const store = mockStore({
           todos: {
             1 : { id: 1, title: 'another todo', done: false },
             2 : { id: 2, title: 'yet another todo', done: true },
@@ -112,7 +108,7 @@ describe('# example module', () => {
       });
 
       it('should get all todos when keyword is empty', () => {
-        const store = createStore({
+        const store = mockStore({
           todos: {
             1 : { id: 1, title: 'another todo', done: false },
             2 : { id: 2, title: 'yet another todo', done: true },
