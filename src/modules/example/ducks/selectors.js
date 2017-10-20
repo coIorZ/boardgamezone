@@ -1,11 +1,9 @@
 import { filter } from 'lodash';
 import { createSelector } from 'reselect';
 
-const s = f => state => f(state['example']);
-
-export const getTodos = s(state => state.todos);
-export const getFilter = s(state => state.filter);
-export const getKeyword = s(state => state.keyword);
+export const getTodos = state => state.example.todos;
+export const getFilter = state => state.example.filter;
+export const getKeyword = state => state.example.keyword;
 export const getFilteredTodos = createSelector(
   getTodos,
   getFilter,

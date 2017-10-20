@@ -31,13 +31,17 @@ app.get('*', (req, res) => {
   res.render('index.html');
 });
 
-app.use((err, req, res) => {
-  req.log.error('unhandled error:', err);
-  res.status(500).render('error.html');
+/*eslint-disable no-unused-vars*/
+app.use((err, req, res, next) => {
+/*eslint-enable no-unused-vars*/
+  req.log.error(`[Unhandled Error] ${req.originalUrl}`, err);
+  res.status(500).json({
+    msg: err.message,
+  });
 });
 
 https.createServer({
   key        : fs.readFileSync(path.resolve(__dirname, 'key.pem')),
   cert       : fs.readFileSync(path.resolve(__dirname, 'cert.pem')),
-  passphrase : 'local'
-}, app).listen(port, () => console.log(`app is running at port ${port}`));
+  passphrase : 'local',
+}, app).listen(port, () => console.log(`app is running on port ${port}`));

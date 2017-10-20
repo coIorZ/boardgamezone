@@ -25,7 +25,7 @@ const injectDep = ({ reducers, epics, __name__ } = {}) => {
   epics && injectEpic(epics);
 };
 
-export const bundle = (module, { name }) => props => (
+export const bundle = (module, { name, props }) => (
   <Bundle load={{ module }}>
     {({ module }) => {
       injectDep(module);

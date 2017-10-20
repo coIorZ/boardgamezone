@@ -5,7 +5,7 @@ import { setKeyword } from './actions';
 
 const getKeywordEpic = debounceTime => action$ => 
   action$.ofType(EDIT_KEYWORD)
-    .map(({ payload }) => payload)
+    .pluck('payload')
     .debounceTime(debounceTime)
     .distinctUntilChanged()
     .map(value => setKeyword(value));

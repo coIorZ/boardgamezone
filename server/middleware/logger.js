@@ -3,6 +3,7 @@ import logger from '../lib/logger.js';
 
 export default (req, res, next) => {
   const rEnd = res.end.bind(res);
+  // const rJson = res.json.bind(res);
   req._reqStartTime = new Date();
 
   req.log = wrapReqId(logger)(v4());
@@ -20,6 +21,7 @@ export default (req, res, next) => {
       `${colors[resTime > 200 ? 'red' : 'cyan'] + resTime + colors.reset} ms`, 
     );
     rEnd(chunk, encoding);
+    // rJson(result);
   };
 
   next();

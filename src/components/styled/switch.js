@@ -35,7 +35,7 @@ const Inner = Base.withComponent('div').extend`
 `;
 
 export default ({ checked, onSwitch = () => ({}), ...props }) => (
-  <Outter checked={checked} onClick={onSwitch} {...props}>
+  <Outter checked={checked} onClick={onSwitch.bind(null, !checked)} {...props}>
     <Inner checked={checked} {...props}></Inner>
   </Outter>
 );

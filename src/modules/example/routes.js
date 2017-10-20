@@ -1,6 +1,7 @@
 import { bundle } from 'utils/redux_bundle';
 
-const getComp = name => bundle(import(/* webpackChunkName: "example" */ './index'), { name });
+const getComp = name => props =>
+  bundle(import(/* webpackChunkName: "example" */ './index'), { name, props });
 
 export default [
   { path: '/example', render: getComp('Home'), exact: true },

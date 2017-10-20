@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Flex, Input, Placeholder, Button, Switch } from 'components/styled';
 
-export default class LoginForm extends Component {
+export default class LogInForm extends Component {
   state = {
     username   : '',
     password   : '',
@@ -26,7 +26,7 @@ export default class LoginForm extends Component {
               onSwitch={this.toggleSwitch}/>
           </Flex>
           <Flex center m-top-bottom-lg>
-            <Button raised green absolute>LOG IN</Button>
+            <Button raised green absolute type='submit'>LOG IN</Button>
             <Placeholder sm/>
           </Flex>
         </form>
@@ -42,11 +42,13 @@ export default class LoginForm extends Component {
     this.setState({ password: e.target.value });
   }
 
-  submitForm = e => {
-    e.preventDefault();
+  toggleSwitch = checked => {
+    this.setState({ isRemember: checked });
   }
 
-  toggleSwitch = () => {
-    this.setState({ isRemember: !this.state.isRemember });
+  submitForm = e => {
+    e.preventDefault();
+    const { username, password, isRemember } = this.state;
+    this.props.logIn({ username, password, isRemember });
   }
 }

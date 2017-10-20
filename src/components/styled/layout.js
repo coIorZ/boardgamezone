@@ -21,4 +21,5 @@ export const Main = Base.withComponent('div').extend`
   background-color: #111113;
   color: #ffffff;
   min-height: 100vh;
+  cursor: default;
 `;
