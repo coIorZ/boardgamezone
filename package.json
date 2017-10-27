@@ -1,6 +1,6 @@
 {
   "name": "boardgamezone",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "board game online play ground",
   "main": "index.js",
   "scripts": {

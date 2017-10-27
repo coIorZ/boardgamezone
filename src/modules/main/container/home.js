@@ -7,7 +7,7 @@ import { getLoggedUser } from 'modules/global/ducks/selectors';
 class Home extends Component {
   render() {
     return (
-      <div>This is home page</div>
+      <div>This is home page, {this.props.user.name}</div>
     );
   }
 }

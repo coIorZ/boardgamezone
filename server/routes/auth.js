@@ -24,7 +24,8 @@ router.post('/register', asyncWrap(async (req, res) => {
 
 router.post('/login', asyncWrap(async (req, res) => {
   res.status(200).json({
-    code: 0,
+    code : 0,
+    name : 'coiorz',
   });
 }));
 
