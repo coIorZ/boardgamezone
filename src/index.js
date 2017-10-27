@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
-import 'rxjs/Rx';
 
 import store from './store';
 import routes from './routes';

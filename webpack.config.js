@@ -7,13 +7,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   entry: {
     app: [
-      './src/index.js', 
+      './src/index.js',
       'normalize.css',
       'babel-polyfill',
     ],
     vendor: [
-      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions', 
-      'reselect', 'redux-observable', 'lodash', 'rxjs', 'styled-components',
+      'react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'redux-actions',
+      'reselect', 'redux-observable', 'lodash', 'rxjs', 'rxjs/Rx', 'styled-components',
       './src/components/styled',
     ],
   },
