@@ -4,6 +4,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+let plugins = [
+  new HtmlWebpackPlugin({
+    template : './src/views/index.html',
+    inject   : true,
+  }),
+  new LodashWebpackPlugin({
+    collections: true,
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+  }),
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production'),
+    },
+  }),
+  new webpack.optimize.ModuleConcatenationPlugin(),
+];
+
+if(process.env.NODE_ENV === 'production') {
+  plugins.push(new BundleAnalyzerPlugin());
+}
+
 module.exports = {
   entry: {
     app: [
@@ -50,23 +73,5 @@ module.exports = {
     ],
   },
   devtool : 'source-map',
-  plugins : [
-    new HtmlWebpackPlugin({
-      template : './src/views/index.html',
-      inject   : true,
-    }),
-    new LodashWebpackPlugin({
-      collections: true,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new BundleAnalyzerPlugin(),
-  ],
+  plugins : plugins,
 };
