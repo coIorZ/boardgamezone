@@ -11,7 +11,7 @@ import logger from './middleware/logger.js';
 import routes from './routes';
 
 const app = express();
-const port = process.env.PORT || 8443;
+const port = process.env.PORT || 8001;
 
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));

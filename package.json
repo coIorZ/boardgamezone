@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "node_modules/.bin/eslint .",
-    "build": "node_modules/.bin/webpack -p --watch",
-    "start": "node_modules/.bin/nodemon server/app.js --exec babel-node"
+    "lint": "eslint .",
+    "build": "webpack -p --watch",
+    "start": "nodemon server/app.js --exec babel-node"
   },
   "pre-commit": [
     "lint",
