@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { handleAction, handleActions } from 'redux-actions';
+import { handleAction } from 'redux-actions';
 
 import {
   SET_LOGGED_USER,

@@ -18,7 +18,7 @@ export const Placeholder = Base.withComponent('div').extend`
 `;
 
 export const Main = Base.withComponent('div').extend`
-  background-color: #111113;
+  ${props => props.dark && 'background-color: #111113;'}
   color: #ffffff;
   min-height: 100vh;
   cursor: default;

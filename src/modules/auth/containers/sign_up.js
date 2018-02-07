@@ -10,7 +10,7 @@ import { signUp } from '../ducks/actions';
 export class SignUp extends Component {
   render() {
     return (
-      <Main>
+      <Main dark>
         <Header/>
         <SignUpForm {...this.props}/>
         <Placeholder/>

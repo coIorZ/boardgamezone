@@ -23,9 +23,10 @@ router.post('/register', asyncWrap(async (req, res) => {
 }));
 
 router.post('/login', asyncWrap(async (req, res) => {
+  const { username } = req.body;
   res.status(200).json({
     code : 0,
-    name : 'coiorz',
+    name : username,
   });
 }));
 
