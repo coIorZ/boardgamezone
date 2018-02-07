@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "build": "webpack -p --watch",
-    "building": "webpack -p",
+    "build": "webpack -p", 
+    "building": "webpack -p --watch",
     "start": "nodemon server/app.js --exec babel-node"
   },
   "pre-commit": [
