@@ -41,7 +41,7 @@
     "serve-favicon": "^2.4.3",
     "styled-components": "^2.1.2",
     "uuid": "^3.1.0",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
